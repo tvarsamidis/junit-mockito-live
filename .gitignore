@@ -1,0 +1,39 @@
+# -------------------------
+# IntelliJ IDEA (safe subset)
+# -------------------------
+
+# User-specific IDE files (never commit)
+.idea/workspace.xml
+.idea/shelf/
+.idea/inspectionProfiles/
+.idea/usage.statistics.xml
+.idea/uiDesigner.xml
+.idea/dictionaries/
+.idea/httpRequests/
+
+# Local data IntelliJ regenerates
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+
+# Safe to ignore: caches and misc
+.idea/caches/
+.idea/gradle.xml
+.idea/libraries/
+
+# -------------------------
+# Maven
+# -------------------------
+target/
+
+# -------------------------
+# OS / Editor junk
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
