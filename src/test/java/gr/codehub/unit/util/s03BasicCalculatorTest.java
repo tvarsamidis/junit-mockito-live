@@ -69,11 +69,23 @@ public class s03BasicCalculatorTest {
     @Test
     void shouldCompleteCalculationsWithinTimeLimit_incorrect() {
         // Mystery to be revealed next time - test fails on precision, not on duration
-        assertTimeout(  Duration.of(1, ChronoUnit.MICROS) , () -> {
+        assertTimeout(  Duration.of(1, ChronoUnit.MILLIS) , () -> {
             for(long i = 0; i <= 2_000_000_000L; i++) {
                 basicCalculator.plus(0.1);
             }
             assertEquals(200_000_000L, basicCalculator.getResult());
         });
+    }
+
+    @Test
+    void shouldCompleteCalculationsWithinTimeLimit() {
+        double[] result = {0};
+        assertTimeout(  Duration.of(5900, ChronoUnit.MILLIS) , () -> {
+            for(long i = 0; i <= 2_000_000_000L; i++) {
+                basicCalculator.plus(0.1);
+            }
+            result[0] = basicCalculator.getResult();
+        });
+        assertEquals(200_000_000L, result[0]);
     }
 }
