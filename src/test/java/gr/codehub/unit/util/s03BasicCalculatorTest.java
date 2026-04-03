@@ -5,9 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -80,12 +82,25 @@ public class s03BasicCalculatorTest {
     @Test
     void shouldCompleteCalculationsWithinTimeLimit() {
         double[] result = {0};
-        assertTimeout(  Duration.of(5900, ChronoUnit.MILLIS) , () -> {
+        assertTimeout(  Duration.of(1, ChronoUnit.MILLIS) , () -> {
             for(long i = 0; i <= 2_000_000_000L; i++) {
                 basicCalculator.plus(0.1);
             }
             result[0] = basicCalculator.getResult();
         });
+        assertEquals(200_000_000L, basicCalculator.getResult());
+    }
+
+    @Test
+    @Timeout(value=1, unit= TimeUnit.MILLISECONDS)
+    void shouldCompleteCalculationsWithinTimeLimitByAnnotation() {
+        double[] result = {0};
+
+        for(long i = 0; i <= 2_000_000_000L; i++) {
+            basicCalculator.plus(0.1);
+        }
+        result[0] = basicCalculator.getResult();
+
         assertEquals(200_000_000L, result[0]);
     }
 }
